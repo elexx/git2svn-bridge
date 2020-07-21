@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
 set -euo pipefail
 
-for d in /data/repo_*/ ; do
+for d in /data/repo_* ; do
+	if [[ ! -d "$d" ]] ; then
+		continue
+	fi
+
 	cd "$d"
 
 	echo "syncing $d"
