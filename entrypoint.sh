@@ -33,8 +33,8 @@ usage()
 	echo "      -u <username>  GIT username"
 	echo "      -p <password>  GIT password"
 	echo "   init              initializes a new repository to be sync by the sync command"
-	echo "      -s <url>       SVN repository url http://svnserver/repo/trunk include the path to the branch!"
 	echo "      -g <url>       GIT repository url http://gitserver/repo.git"
+	echo "      -s <url>       SVN repository url http://svnserver/repo/trunk include the path to the branch!"
 	echo "      -c <commit>    OPTIONAL: SHA-1 of the last GIT commit that has been committet so SVN."
 }
 
@@ -169,7 +169,9 @@ init()
 	git config user.name "git2svn bridge"
 	git config user.email "git2svn-bridge@localhost"
 
-	[[ ! -z "$LAST_COMMIT" ]] && git replace --graft svn/git-svn "$LAST_COMMIT"
+	if [[ ! -z "$LAST_COMMIT" ]] ; then
+		git replace --graft svn/git-svn "$LAST_COMMIT"
+	fi
 }
 
 
